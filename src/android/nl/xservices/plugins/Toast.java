@@ -59,7 +59,10 @@ public class Toast extends CordovaPlugin {
           if ("top".equals(position)) {
             toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 20 + addPixelsY);
           } else  if ("bottom".equals(position)) {
-            toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 20 - addPixelsY);
+            // KEF: Fix our positioning to be above our ads.
+            float density = cordova.getActivity().getApplicationContext().getResources().getDisplayMetrics().density;
+            toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, (int)(60 * density));
+            //toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 20 - addPixelsY);
           } else if ("center".equals(position)) {
             toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, addPixelsY);
           } else {
